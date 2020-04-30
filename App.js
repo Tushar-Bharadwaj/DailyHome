@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { StatusBar } from "react-native";
 import NavigationManager from "./navigation/NavigationManager";
 import { Root } from "native-base";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const fetchFont = () => {
   Font.loadAsync({
@@ -23,8 +25,10 @@ export default function App() {
 
   return (
     <Root>
-      <StatusBar hidden />
-      <NavigationManager />
+      <Provider store={store}>
+        <StatusBar hidden />
+        <NavigationManager />
+      </Provider>
     </Root>
   );
 }

@@ -1,25 +1,33 @@
-import { Button, Card, CardItem, Container, Content, Input } from "native-base";
-import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  CardItem,
+  Container,
+  Content,
+  Input,
+  Toast,
+} from "native-base";
+import React, { useState, useEffect } from "react";
 import { Image, Text } from "react-native";
 import DailyButton from "../../components/DailyButton";
-import styles from "./style";
 import ErrorCard from "../../components/ErrorCard";
 import useForm from "../../hooks/useForm";
+import styles from "./style";
 
 const validateForm = ({ email, password }) => {
   const errors = {
     email: [],
     password: [],
-    hasError: false
+    hasError: false,
   };
   const emailRegex = /\S+@\S+\.\S+/;
-  if (email.length < 6 || email.length > 80) {
+  if (email.trim().length < 6 || email.trim().length > 80) {
     errors.email.push("Email address must be 6 to 80 characters long.");
   }
   if (!emailRegex.test(email)) {
     errors.email.push("Please enter a valid email address");
   }
-  if (password.length < 6 || password.length > 50) {
+  if (password.trim().length < 6 || password.trim().length > 50) {
     errors.password.push("A password must be 6 to 50 characters long");
   }
 
@@ -29,26 +37,41 @@ const validateForm = ({ email, password }) => {
   return errors;
 };
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
   const initalFormState = {
     email: "",
-    password: ""
+    password: "",
   };
 
   const [errors, setErrors] = useState({
     email: [],
-    password: []
+    password: [],
   });
 
   const [formInputs, handleChange] = useForm(initalFormState);
 
-  const handleSubmit = input => {
+  const handleSubmit = (input) => {
     setErrors({});
     const errorResult = validateForm(input);
     if (errorResult.hasError) {
       setErrors(errorResult);
     }
   };
+
+  useEffect(() => {
+    //Making Sure, upon account creation we go to login page.
+    if (
+      route.params?.accountCreated != undefined &&
+      route.params.accountCreated
+    ) {
+      Toast.show({
+        text: "Your account has been successfully created!",
+        buttonText: "Okay",
+        type: "success",
+      });
+      route.params.accountCreated = false;
+    }
+  });
 
   return (
     <Container>
@@ -65,13 +88,13 @@ const LoginScreen = ({ navigation }) => {
           <CardItem
             style={{
               paddingTop: 3,
-              paddingBottom: 3
+              paddingBottom: 3,
             }}
           >
             <Input
               placeholder="Email"
               style={styles.input}
-              onChangeText={val => handleChange("email", val)}
+              onChangeText={(val) => handleChange("email", val)}
             />
           </CardItem>
 
@@ -81,7 +104,7 @@ const LoginScreen = ({ navigation }) => {
               placeholder="Password"
               secureTextEntry={true}
               style={styles.input}
-              onChangeText={val => handleChange("password", val)}
+              onChangeText={(val) => handleChange("password", val)}
             />
           </CardItem>
 
@@ -98,14 +121,14 @@ const LoginScreen = ({ navigation }) => {
                 paddingHorizontal: 20,
                 borderColor: "#f5cd79",
                 borderWidth: 1,
-                borderRadius: 4
+                borderRadius: 4,
               }}
               onPress={() => navigation.navigate("Register")}
             >
               <Text
                 style={{
                   color: "#596275",
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 }}
               >
                 Create New Account

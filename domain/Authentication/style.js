@@ -5,16 +5,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#e15f41",
     elevation: 5,
     alignItems: "center",
-    shadowColor: "#000"
+    shadowColor: "#000",
   },
   headerText: {
     color: "#FFF",
     fontWeight: "bold",
-    fontSize: 19
+    fontSize: 19,
   },
   formContainer: {
     justifyContent: "center",
-    textAlign: "center"
+    textAlign: "center",
   },
   input: {
     height: 50,
@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     borderRadius: 5,
-    backgroundColor: "#FAFAFA"
+    backgroundColor: "#FAFAFA",
   },
   buttonText: {
     color: "#FFF",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default styles;

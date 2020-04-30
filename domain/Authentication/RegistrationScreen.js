@@ -7,11 +7,10 @@ import {
   Icon,
   Input,
   Item,
-  Picker,
   Toast,
 } from "native-base";
 import React, { useState } from "react";
-import { Image, Text } from "react-native";
+import { Image, Text, View, Picker } from "react-native";
 import DailyButton from "../../components/DailyButton";
 import ErrorCard from "../../components/ErrorCard";
 import useForm from "../../hooks/useForm";
@@ -133,24 +132,45 @@ const RegistrationScreen = ({ navigation }) => {
             />
           </CardItem>
 
-          <CardItem style={{ paddingTop: 3, paddingBottom: 3 }}>
-            <Item picker>
-              <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
-                placeholder="Select Your Gender"
-                placeholderStyle={{ color: "#CCC", textAlign: "center" }}
-                placeholderIconColor="#007aff"
-                style={styles.input}
-                itemStyle={{ textAlign: "center" }}
-                selectedValue={formInput.gender}
-                onValueChange={(val) => handleChange("gender", val)}
-              >
-                <Picker.Item label="Male" value="Male" />
-                <Picker.Item label="Female" value="Female" />
-                <Picker.Item label="Others" value="Others" />
-              </Picker>
-            </Item>
+          <CardItem
+            style={{
+              width: undefined,
+            }}
+          >
+            <View
+              style={{
+                flex: 0.5,
+                height: 50,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 18, color: "#555" }}>Gender</Text>
+            </View>
+            <View style={{ flex: 0.5, ...styles.input }}>
+              <Item style={{ borderBottomWidth: 0 }} picker>
+                <Picker
+                  mode="dropdown"
+                  iosIcon={<Icon name="arrow-down" />}
+                  placeholder="Select Your Gender"
+                  placeholderIconColor="#777"
+                  useNativeAndroidPickerStyle={false}
+                  style={{
+                    width: 200,
+                    color: "#777",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  itemStyle={{ textAlign: "center" }}
+                  selectedValue={formInput.gender}
+                  onValueChange={(val) => handleChange("gender", val)}
+                >
+                  <Picker.Item label="Male" value="Male" />
+                  <Picker.Item label="Female" value="Female" />
+                  <Picker.Item label="Others" value="Others" />
+                </Picker>
+              </Item>
+            </View>
           </CardItem>
 
           <CardItem>

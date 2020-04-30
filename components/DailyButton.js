@@ -3,7 +3,11 @@ import { StyleSheet } from "react-native";
 import { Button } from "native-base";
 
 const DailyButton = props => {
-  return <Button style={styles.button}>{props.children}</Button>;
+  return (
+    <Button style={styles.button} onPress={props.onPress}>
+      {props.children}
+    </Button>
+  );
 };
 
 const styles = StyleSheet.create({

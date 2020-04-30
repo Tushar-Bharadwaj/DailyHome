@@ -8,11 +8,13 @@ import {
   Toast,
 } from "native-base";
 import React, { useState, useEffect } from "react";
-import { Image, Text } from "react-native";
+import { Image, Text, AsyncStorage } from "react-native";
 import DailyButton from "../../components/DailyButton";
 import ErrorCard from "../../components/ErrorCard";
 import useForm from "../../hooks/useForm";
 import styles from "./style";
+import getAxios from "../../util/axios-helper";
+import { AppLoading } from "expo";
 
 const validateForm = ({ email, password }) => {
   const errors = {
@@ -43,6 +45,8 @@ const LoginScreen = ({ navigation, route }) => {
     password: "",
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [errors, setErrors] = useState({
     email: [],
     password: [],
@@ -50,11 +54,39 @@ const LoginScreen = ({ navigation, route }) => {
 
   const [formInputs, handleChange] = useForm(initalFormState);
 
-  const handleSubmit = (input) => {
+  const handleSubmit = async (input) => {
     setErrors({});
     const errorResult = validateForm(input);
     if (errorResult.hasError) {
       setErrors(errorResult);
+    } else {
+      setIsLoading(true);
+      const Axios = getAxios();
+
+      //Make Ajax Call
+      //Upon Success Get The Token And Add It To Async Storage
+      //Add The Token To Redux Store
+      await Axios.post("/user_profile/auth/signin", {
+        password: formInputs.password,
+        email: formInputs.email,
+      })
+        .then((response) => {
+          setIsLoading(false);
+          console.log(response.data);
+          Toast.show({
+            text: "You have successfully logged in!",
+            buttonText: "Okay",
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          Toast.show({
+            text: "Error Has Occured!",
+            buttonText: "Okay",
+            type: "danger",
+          });
+        });
     }
   };
 
@@ -73,7 +105,7 @@ const LoginScreen = ({ navigation, route }) => {
     }
   });
 
-  return (
+  return !isLoading ? (
     <Container>
       <Content>
         <Card transparent>
@@ -138,6 +170,8 @@ const LoginScreen = ({ navigation, route }) => {
         </Card>
       </Content>
     </Container>
+  ) : (
+    <AppLoading />
   );
 };
 

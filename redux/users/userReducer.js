@@ -1,9 +1,13 @@
-import { SET_LOGGED_IN_USER, SIGN_IN_USER } from "./userActions";
+import { FETCH_USER_INFO, SIGN_IN_USER } from "./userActions";
 
 const initialState = {
   isLoggedIn: false,
   userToken: "",
-  details: {},
+  details: {
+    id: "",
+    email: "",
+    name: "",
+  },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -15,7 +19,7 @@ const userReducer = (state = initialState, action) => {
         userToken: action.userToken,
       };
 
-    case SET_LOGGED_IN_USER:
+    case FETCH_USER_INFO:
       return {
         ...state,
         details: action.details,

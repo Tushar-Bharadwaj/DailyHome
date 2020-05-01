@@ -10,11 +10,11 @@ import {
 } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Image, Text } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DailyButton from "../../components/DailyButton";
 import ErrorCard from "../../components/ErrorCard";
 import useForm from "../../hooks/useForm";
-import { signInUser } from "../../redux/users/userActions";
+import { signInUser, fetchUserDetails } from "../../redux/users/userActions";
 import styles from "./style";
 
 const validateForm = ({ email, password }) => {
@@ -55,6 +55,7 @@ const LoginScreen = ({ navigation, route }) => {
 
   const [formInputs, handleChange] = useForm(initalFormState);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.users);
   const handleSubmit = (input) => {
     setErrors({});
     const errorResult = validateForm(input);
@@ -63,6 +64,9 @@ const LoginScreen = ({ navigation, route }) => {
     } else {
       setIsLoading(false);
       dispatch(signInUser(input));
+      console.log(user.userToken);
+      dispatch(fetchUserDetails(user.userToken));
+      console.log(user);
       navigation.navigate("Profile");
     }
   };

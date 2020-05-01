@@ -1,21 +1,25 @@
 import getAxios from "../../util/axios-helper";
 
 export const SIGN_IN_USER = "sign-in-user";
-export const SET_LOGGED_IN_USER = "set-logged-in-user";
+export const FETCH_USER_INFO = "fetch-user-info";
 
-export const signIn = (userToken) => {
+export const signInAction = (userToken) => {
   return {
     type: SIGN_IN_USER,
     userToken: userToken,
   };
 };
 
-export const setLoggedInUser = (details) => {
+export const getUserInfoAction = (details) => {
   return {
-    type: SET_LOGGED_IN_USER,
+    type: FETCH_USER_INFO,
     details: details,
   };
 };
+
+/**
+ * Thunk Related Actions
+ */
 
 export const signInUser = (formInputs) => {
   return (dispatch) => {
@@ -26,11 +30,29 @@ export const signInUser = (formInputs) => {
     })
       .then((response) => {
         const authToken = response.data.accessToken;
-        dispatch(signIn(authToken));
+        dispatch(signInAction(authToken));
       })
       .catch((error) => {
         //TODO: Proper Error Toast
-        console.log("Error Has Occured");
+        console.log(error);
+      });
+  };
+};
+
+export const fetchUserDetails = (token) => {
+  return (dispatch) => {
+    let Axios = getAxios(token);
+    Axios.get("/user_profile/info")
+      .then((response) => {
+        const userDetails = {
+          id: response.data.id,
+          name: response.data.name,
+          email: response.data.email,
+        };
+        dispatch(getUserInfoAction(userDetails));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };

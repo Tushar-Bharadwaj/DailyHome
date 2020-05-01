@@ -9,6 +9,9 @@ export default getAxios = (token = "") => {
       "Access-Control-Allow-Origin": "*",
     },
   });
+  if (token.length > 0)
+    AuthorizedRequests.defaults.headers.common["Authorization"] =
+      "Bearer " + token;
 
   return AuthorizedRequests;
 };

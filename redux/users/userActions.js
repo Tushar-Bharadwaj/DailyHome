@@ -2,6 +2,7 @@ import getAxios from "../../util/axios-helper";
 
 export const SIGN_IN_USER = "sign-in-user";
 export const FETCH_USER_INFO = "fetch-user-info";
+export const SIGN_OUT_USER = "sign-out-user";
 
 export const signInAction = (userToken) => {
   return {
@@ -17,6 +18,12 @@ export const getUserInfoAction = (details) => {
   };
 };
 
+export const signOut = () => {
+  return {
+    type: SIGN_OUT_USER,
+  };
+};
+
 /**
  * Thunk Related Actions
  */
@@ -24,18 +31,21 @@ export const getUserInfoAction = (details) => {
 export const signInUser = (formInputs) => {
   return (dispatch) => {
     let Axios = getAxios();
-    Axios.post("/user_profile/auth/signin", {
-      password: formInputs.password,
-      email: formInputs.email,
-    })
-      .then((response) => {
-        const authToken = response.data.accessToken;
-        dispatch(signInAction(authToken));
+    return new Promise((resolve, reject) => {
+      Axios.post("/user_profile/auth/signin", {
+        password: formInputs.password,
+        email: formInputs.email,
       })
-      .catch((error) => {
-        //TODO: Proper Error Toast
-        console.log(error);
-      });
+        .then((response) => {
+          const authToken = response.data.accessToken;
+          dispatch(signInAction(authToken));
+          return resolve(authToken);
+        })
+        .catch((error) => {
+          //TODO: Proper Error Toast
+          console.log(error);
+        });
+    });
   };
 };
 

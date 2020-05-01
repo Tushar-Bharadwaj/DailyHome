@@ -1,4 +1,4 @@
-import { FETCH_USER_INFO, SIGN_IN_USER } from "./userActions";
+import { FETCH_USER_INFO, SIGN_IN_USER, SIGN_OUT_USER } from "./userActions";
 
 const initialState = {
   isLoggedIn: false,
@@ -24,6 +24,9 @@ const userReducer = (state = initialState, action) => {
         ...state,
         details: action.details,
       };
+
+    case SIGN_OUT_USER:
+      return initialState;
   }
   return state;
 };

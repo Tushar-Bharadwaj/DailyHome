@@ -16,6 +16,7 @@ import ErrorCard from "../../components/ErrorCard";
 import useForm from "../../hooks/useForm";
 import { signInUser, fetchUserDetails } from "../../redux/users/userActions";
 import styles from "./style";
+import SecondaryButton from "../../components/SecondaryButton";
 
 const validateForm = ({ email, password }) => {
   const errors = {
@@ -63,10 +64,12 @@ const LoginScreen = ({ navigation, route }) => {
       setErrors(errorResult);
     } else {
       setIsLoading(false);
-      dispatch(signInUser(input));
-      console.log(user.userToken);
-      dispatch(fetchUserDetails(user.userToken));
-      console.log(user);
+      dispatch(signInUser(input))
+        .then((response) => {
+          dispatch(fetchUserDetails(response));
+        })
+        .catch((error) => console.log(error));
+
       navigation.navigate("Profile");
     }
   };
@@ -128,38 +131,13 @@ const LoginScreen = ({ navigation, route }) => {
           </CardItem>
 
           <CardItem style={{ justifyContent: "center" }}>
-            <Button
-              style={{
-                backgroundColor: "#f7d794",
-                paddingHorizontal: 20,
-                borderColor: "#f5cd79",
-                borderWidth: 1,
-                borderRadius: 4,
-              }}
-              onPress={() => navigation.navigate("Register")}
-            >
-              <Text
-                style={{
-                  color: "#596275",
-                  fontWeight: "bold",
-                }}
-              >
-                Create New Account
-              </Text>
-            </Button>
+            <SecondaryButton onPress={() => navigation.navigate("Register")}>
+              Create New Account
+            </SecondaryButton>
           </CardItem>
 
           <CardItem style={{ justifyContent: "center" }}>
-            <Button
-              style={{
-                backgroundColor: "#f7d794",
-                paddingHorizontal: 20,
-                borderColor: "#f5cd79",
-                borderWidth: 1,
-                borderRadius: 4,
-              }}
-              onPress={() => navigation.navigate("Profile")}
-            >
+            <SecondaryButton onPress={() => navigation.navigate("Profile")}>
               <Text
                 style={{
                   color: "#596275",
@@ -168,7 +146,7 @@ const LoginScreen = ({ navigation, route }) => {
               >
                 Go To Profile
               </Text>
-            </Button>
+            </SecondaryButton>
           </CardItem>
         </Card>
       </Content>

@@ -1,13 +1,27 @@
 import { Card, CardItem, Container, Content } from "native-base";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DailyButton from "../../components/DailyButton";
+import SecondaryButton from "../../components/SecondaryButton";
+import { signOut } from "../../redux/users/userActions";
+import { AppLoading } from "expo";
 
 const UserProfileScreen = ({ navigation }) => {
-  const users = useSelector((state) => state.users.details);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
-  return (
+  const handleSignOut = () => {
+    dispatch(signOut());
+    navigation.navigate("Login");
+  };
+
+  useEffect(() => {
+    if (users.details.id !== "") setIsLoaded(true);
+  }, [users]);
+
+  return isLoaded ? (
     <Container>
       <Content>
         <Card>
@@ -18,9 +32,9 @@ const UserProfileScreen = ({ navigation }) => {
               alignItems: "flex-start",
             }}
           >
-            <Text> ID : {users.id} </Text>
-            <Text> Name : {users.name} </Text>
-            <Text> Email : {users.email} </Text>
+            <Text> ID : {users.details.id} </Text>
+            <Text> Name : {users.details.name} </Text>
+            <Text> Email : {users.details.email} </Text>
           </CardItem>
           <CardItem>
             <DailyButton>
@@ -34,9 +48,16 @@ const UserProfileScreen = ({ navigation }) => {
               </Text>
             </DailyButton>
           </CardItem>
+          <CardItem style={{ justifyContent: "center" }}>
+            <SecondaryButton onPress={() => handleSignOut()}>
+              Sign Out
+            </SecondaryButton>
+          </CardItem>
         </Card>
       </Content>
     </Container>
+  ) : (
+    <AppLoading />
   );
 };
 

@@ -10,7 +10,7 @@ import {
   Toast,
 } from "native-base";
 import React, { useState } from "react";
-import { Image, Text, View, Picker } from "react-native";
+import { Image, Picker, Text, View } from "react-native";
 import DailyButton from "../../components/DailyButton";
 import ErrorCard from "../../components/ErrorCard";
 import useForm from "../../hooks/useForm";

@@ -144,6 +144,28 @@ const LoginScreen = ({ navigation, route }) => {
               </Text>
             </Button>
           </CardItem>
+
+          <CardItem style={{ justifyContent: "center" }}>
+            <Button
+              style={{
+                backgroundColor: "#f7d794",
+                paddingHorizontal: 20,
+                borderColor: "#f5cd79",
+                borderWidth: 1,
+                borderRadius: 4,
+              }}
+              onPress={() => navigation.navigate("Profile")}
+            >
+              <Text
+                style={{
+                  color: "#596275",
+                  fontWeight: "bold",
+                }}
+              >
+                Go To Profile
+              </Text>
+            </Button>
+          </CardItem>
         </Card>
       </Content>
     </Container>

@@ -5,7 +5,8 @@ import { StatusBar } from "react-native";
 import NavigationManager from "./navigation/NavigationManager";
 import { Root } from "native-base";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
 
 const fetchFont = () => {
   Font.loadAsync({
@@ -26,8 +27,10 @@ export default function App() {
   return (
     <Root>
       <Provider store={store}>
-        <StatusBar hidden />
-        <NavigationManager />
+        <PersistGate persistor={persistor}>
+          <StatusBar hidden />
+          <NavigationManager />
+        </PersistGate>
       </Provider>
     </Root>
   );

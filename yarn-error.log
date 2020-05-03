@@ -1,5 +1,5 @@
 Arguments: 
-  F:\Tools\Node JS\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add expo-linear-gradient@~8.1.0
+  F:\Tools\Node JS\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-gesture-handler@~1.6.0 react-native-reanimated@~1.7.0 react-native-screens@~2.2.0 react-native-safe-area-context@0.7.3 @react-native-community/masked-view@0.1.6
 
 PATH: 
   F:\Tools\Git\mingw64\bin;F:\Tools\Git\usr\bin;C:\Users\TUSHAR\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PuTTY;C:\TDM-GCC-64\bin;C:\Gradle\bin;F:\Tools\gcc\bin;F:\workspace\XAMPP\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;F:\Tools\Git\cmd;F:\Tools\Node JS;T:\gcloud\google-cloud-sdk\bin;C:\Program Files\Java\jdk1.8.0_221\bin;F:\Tools\Git\usr\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\TUSHAR\AppData\Local\Programs\Python\Python36-32;C:\Users\TUSHAR\AppData\Local\Programs\Python\Python36-32\Scripts;C:\Program Files (x86)\Yarn\bin;Z:\Support\maven\bin;Z:\flutter\bin;Z:\Support\PgSQL\bin;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Users\TUSHAR\AppData\Roaming\Composer\vendor\bin;F:\Tools\Heroku\bin;C:\Users\TUSHAR\AppData\Roaming\npm;F:\Tools\Node JS\node_modules\npm\bin;C:\Users\TUSHAR\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;D:\IntelliJ\IntelliJ IDEA 2019.2\bin;T:\gcloud\google-cloud-sdk\bin;C:\Users\TUSHAR\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\TUSHAR\AppData\Local\Yarn\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'Z:\ReactNative\DailyHome\node_modules\@babel\compat-data\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'Z:\ReactNative\DailyHome\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {
@@ -28,8 +28,10 @@ npm manifest:
     },
     "dependencies": {
       "@react-native-community/masked-view": "^0.1.10",
+      "@react-navigation/bottom-tabs": "^5.3.3",
       "@react-navigation/native": "^5.1.7",
       "@react-navigation/stack": "^5.2.14",
+      "axios": "^0.19.2",
       "expo": "~37.0.3",
       "expo-font": "~8.1.0",
       "native-base": "^2.13.12",
@@ -40,7 +42,11 @@ npm manifest:
       "react-native-reanimated": "^1.8.0",
       "react-native-safe-area-context": "^0.7.3",
       "react-native-screens": "^2.7.0",
-      "react-native-web": "~0.11.7"
+      "react-native-web": "~0.11.7",
+      "react-redux": "^7.2.0",
+      "redux": "^4.0.5",
+      "redux-persist": "^6.0.0",
+      "redux-thunk": "^2.3.0"
     },
     "devDependencies": {
       "@babel/core": "^7.8.6",

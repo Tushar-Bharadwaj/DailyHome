@@ -67,10 +67,9 @@ const LoginScreen = ({ navigation, route }) => {
       dispatch(signInUser(input))
         .then((response) => {
           dispatch(fetchUserDetails(response));
+          navigation.navigate("Profile");
         })
         .catch((error) => console.log(error));
-
-      navigation.navigate("Profile");
     }
   };
 
@@ -133,19 +132,6 @@ const LoginScreen = ({ navigation, route }) => {
           <CardItem style={{ justifyContent: "center" }}>
             <SecondaryButton onPress={() => navigation.navigate("Register")}>
               Create New Account
-            </SecondaryButton>
-          </CardItem>
-
-          <CardItem style={{ justifyContent: "center" }}>
-            <SecondaryButton onPress={() => navigation.navigate("Profile")}>
-              <Text
-                style={{
-                  color: "#596275",
-                  fontWeight: "bold",
-                }}
-              >
-                Go To Profile
-              </Text>
             </SecondaryButton>
           </CardItem>
         </Card>

@@ -32,7 +32,6 @@ const validateForm = ({ name, email, password }) => {
     errors.email.push("Please enter a valid email address");
   }
   if (password.trim().length < 6 || password.trim().length > 50) {
-    console.log(password);
     errors.password.push("A password must be 6 to 50 characters long");
   }
   if (name.trim().length < 6) {

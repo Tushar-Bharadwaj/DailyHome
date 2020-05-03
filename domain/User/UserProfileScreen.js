@@ -11,7 +11,6 @@ const UserProfileScreen = ({ navigation }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
-
   const handleSignOut = () => {
     dispatch(signOut());
     navigation.navigate("Login");

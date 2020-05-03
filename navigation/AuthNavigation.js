@@ -4,12 +4,15 @@ import { StyleSheet } from "react-native";
 import LoginScreen from "../domain/Authentication/LoginScreen";
 import RegistrationScreen from "../domain/Authentication/RegistrationScreen";
 import UserProfileScreen from "../domain/User/UserProfileScreen";
-
-const Stack = createStackNavigator();
+import { useSelector } from "react-redux";
 
 const AuthNavigation = () => {
+  const Stack = createStackNavigator();
+
+  const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
+  const initialRouteName = isLoggedIn ? "Profile" : "Login";
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
         name="Login"
         component={LoginScreen}
@@ -38,6 +41,7 @@ const AuthNavigation = () => {
           headerStyle: styles.header,
           headerTitleStyle: styles.headerText,
           headerTitleAlign: "center",
+          headerLeft: null,
         }}
       />
     </Stack.Navigator>

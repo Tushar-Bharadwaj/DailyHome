@@ -1,10 +1,9 @@
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useSelector } from "react-redux";
 import FollowingScreen from "../domain/Following/FollowingScreen";
 import AuthNavigation from "./AuthNavigation";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator();

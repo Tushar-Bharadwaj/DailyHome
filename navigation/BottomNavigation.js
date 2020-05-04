@@ -4,10 +4,11 @@ import { StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FollowingScreen from "../domain/Following/FollowingScreen";
 import AuthNavigation from "./AuthNavigation";
+import { useSelector } from "react-redux";
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator();
-
+  const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
   return (
     <Tabs.Navigator
       tabBarOptions={{
@@ -37,13 +38,15 @@ const BottomNavigation = () => {
       })}
     >
       <Tabs.Screen name="Profile" component={AuthNavigation} />
-      <Tabs.Screen
-        name="Following"
-        component={FollowingScreen}
-        options={{
-          title: "Following",
-        }}
-      />
+      {isLoggedIn && (
+        <Tabs.Screen
+          name="Following"
+          component={FollowingScreen}
+          options={{
+            title: "Following",
+          }}
+        />
+      )}
     </Tabs.Navigator>
   );
 };

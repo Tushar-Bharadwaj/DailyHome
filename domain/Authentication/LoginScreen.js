@@ -1,22 +1,14 @@
 import { AppLoading } from "expo";
-import {
-  Button,
-  Card,
-  CardItem,
-  Container,
-  Content,
-  Input,
-  Toast,
-} from "native-base";
+import { Card, CardItem, Container, Content, Input, Toast } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Image, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import DailyButton from "../../components/DailyButton";
 import ErrorCard from "../../components/ErrorCard";
-import useForm from "../../hooks/useForm";
-import { signInUser, fetchUserDetails } from "../../redux/users/userActions";
-import styles from "./style";
 import SecondaryButton from "../../components/SecondaryButton";
+import useForm from "../../hooks/useForm";
+import { fetchUserDetails, signInUser } from "../../redux/users/userActions";
+import styles from "./style";
 
 const validateForm = ({ email, password }) => {
   const errors = {

@@ -5,6 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FollowingScreen from "../domain/Following/FollowingScreen";
 import AuthNavigation from "./AuthNavigation";
 import { useSelector } from "react-redux";
+import BlockedScreen from "../domain/Blocked/BlockedScreen";
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator();
@@ -41,7 +42,7 @@ const BottomNavigation = () => {
       {isLoggedIn && (
         <Tabs.Screen
           name="Following"
-          component={FollowingScreen}
+          component={BlockedScreen}
           options={{
             title: "Following",
           }}

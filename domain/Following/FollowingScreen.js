@@ -26,6 +26,7 @@ const FollowingScreen = ({ navigation }) => {
       let languages = await fetchNewsComponents("languages");
       let localities = await fetchNewsComponents("localities");
       let following = await getFollowing(user);
+      console.log(following);
       setGenre(
         userIsFollowingMetaData(genres, following.genres.all_the_genres)
       );
@@ -49,11 +50,6 @@ const FollowingScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <Header style={styles.header}>
-        <Body style={styles.headerText}>
-          <Title>Following</Title>
-        </Body>
-      </Header>
       <Content>
         {isLoaded && (
           <>

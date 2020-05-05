@@ -40,11 +40,6 @@ const BlockedScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <Header style={styles.header}>
-        <Body style={styles.headerText}>
-          <Title>Blocked</Title>
-        </Body>
-      </Header>
       <Content>
         {isLoaded && (
           <>

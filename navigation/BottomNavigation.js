@@ -6,6 +6,7 @@ import FollowingScreen from "../domain/Following/FollowingScreen";
 import AuthNavigation from "./AuthNavigation";
 import { useSelector } from "react-redux";
 import BlockedScreen from "../domain/Blocked/BlockedScreen";
+import PreferenceScreen from "../domain/Preferences/PreferenceScreen";
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator();
@@ -30,7 +31,7 @@ const BottomNavigation = () => {
           switch (route.name) {
             case "Profile":
               return <Ionicons name="md-person" size={size} color={color} />;
-            case "Following":
+            case "Preference":
               return <Ionicons name="md-star" size={size} color={color} />;
             case "Home":
               return <Ionicons name="md-home" size={size} color={color} />;
@@ -41,10 +42,10 @@ const BottomNavigation = () => {
       <Tabs.Screen name="Profile" component={AuthNavigation} />
       {isLoggedIn && (
         <Tabs.Screen
-          name="Following"
-          component={BlockedScreen}
+          name="Preference"
+          component={PreferenceScreen}
           options={{
-            title: "Following",
+            title: "Preference",
           }}
         />
       )}
@@ -53,14 +54,3 @@ const BottomNavigation = () => {
 };
 
 export default BottomNavigation;
-
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#e15f41",
-  },
-  headerText: {
-    color: "#FFF",
-    fontWeight: "bold",
-    alignSelf: "center",
-  },
-});

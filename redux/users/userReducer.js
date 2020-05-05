@@ -26,7 +26,10 @@ const userReducer = (state = initialState, action) => {
       };
 
     case SIGN_OUT_USER:
-      return initialState;
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
   }
   return state;
 };

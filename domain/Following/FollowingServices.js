@@ -1,4 +1,6 @@
 import getAxios from "../../util/axios-helper";
+import { useDispatch } from "react-redux";
+import { fetchBlockedAndFollowing } from "../../redux/users/userActions";
 
 export const fetchNewsComponents = async (name) => {
   const Axios = getAxios();
@@ -18,7 +20,6 @@ export const fetchNewsComponents = async (name) => {
 };
 
 export const follow = async (user, param, id, setUpdate) => {
-  console.log("Inside Follow");
   const Axios = getAxios(user.userToken);
   try {
     await Axios.post(`/user_profile/following/`, {
@@ -37,7 +38,6 @@ export const follow = async (user, param, id, setUpdate) => {
 };
 
 export const unFollow = async (user, param, id, setUpdate) => {
-  console.log("Inside unFollow");
   const Axios = getAxios(user.userToken);
   try {
     await Axios.delete(`/user_profile/following`, {

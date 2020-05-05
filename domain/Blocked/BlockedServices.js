@@ -18,7 +18,6 @@ export const fetchNewsComponents = async (name) => {
 };
 
 export const block = async (user, param, id, setUpdate) => {
-  console.log("Inside Block");
   const Axios = getAxios(user.userToken);
   try {
     await Axios.post(`/user_profile/blocked/`, {
@@ -37,7 +36,6 @@ export const block = async (user, param, id, setUpdate) => {
 };
 
 export const unBlock = async (user, param, id, setUpdate) => {
-  console.log("Inside unBlock");
   const Axios = getAxios(user.userToken);
   try {
     await Axios.delete(`/user_profile/blocked`, {

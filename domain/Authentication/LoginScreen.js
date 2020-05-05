@@ -7,7 +7,11 @@ import DailyButton from "../../components/DailyButton";
 import ErrorCard from "../../components/ErrorCard";
 import SecondaryButton from "../../components/SecondaryButton";
 import useForm from "../../hooks/useForm";
-import { fetchUserDetails, signInUser } from "../../redux/users/userActions";
+import {
+  fetchUserDetails,
+  signInUser,
+  fetchBlockedAndFollowing,
+} from "../../redux/users/userActions";
 import styles from "./style";
 
 const validateForm = ({ email, password }) => {
@@ -58,7 +62,9 @@ const LoginScreen = ({ navigation, route }) => {
       setIsLoading(false);
       dispatch(signInUser(input))
         .then((response) => {
-          dispatch(fetchUserDetails(response));
+          dispatch(fetchUserDetails(response)).then((user) => {
+            dispatch(fetchBlockedAndFollowing(user.id, response));
+          });
           navigation.navigate("Profile");
         })
         .catch((error) => console.log(error));

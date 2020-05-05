@@ -32,10 +32,8 @@ const BlockedScreen = ({ navigation }) => {
       setLocality(
         userIsBlockedMetaData(localities, blocked.localities.all_the_localities)
       );
-      console.log(genre);
       setIsLoaded(true);
     })();
-    console.log("Use Effect Update Value :", update);
   }, [update, setUpdate]);
 
   return (

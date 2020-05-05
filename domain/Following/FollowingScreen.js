@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import getAxios from "../../util/axios-helper";
 import FollowingList from "./FollowingList";
 import styles from "./style";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   unFollow,
   follow,
@@ -11,6 +11,7 @@ import {
   getFollowing,
   fetchNewsComponents,
 } from "./FollowingServices";
+import { fetchBlockedAndFollowing } from "../../redux/users/userActions";
 
 const FollowingScreen = ({ navigation }) => {
   const [update, setUpdate] = useState(0);
@@ -19,14 +20,13 @@ const FollowingScreen = ({ navigation }) => {
   const [locality, setLocality] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector((state) => state.users);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       let genres = await fetchNewsComponents("genres");
       let languages = await fetchNewsComponents("languages");
       let localities = await fetchNewsComponents("localities");
       let following = await getFollowing(user);
-      console.log(following);
       setGenre(
         userIsFollowingMetaData(genres, following.genres.all_the_genres)
       );
@@ -42,10 +42,10 @@ const FollowingScreen = ({ navigation }) => {
           following.localities.all_the_localities
         )
       );
-      console.log(genre);
+      dispatch(fetchBlockedAndFollowing(user.details.id, user.userToken));
+
       setIsLoaded(true);
     })();
-    console.log("Use Effect Update Value :", update);
   }, [update, setUpdate]);
 
   return (

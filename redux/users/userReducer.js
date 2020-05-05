@@ -1,12 +1,21 @@
-import { FETCH_USER_INFO, SIGN_IN_USER, SIGN_OUT_USER } from "./userActions";
+import {
+  FETCH_USER_INFO,
+  SIGN_IN_USER,
+  SIGN_OUT_USER,
+  UPDATE_PREFERENCE,
+} from "./userActions";
 
-const initialState = {
+let initialState = {
   isLoggedIn: false,
   userToken: "",
   details: {
     id: "",
     email: "",
     name: "",
+  },
+  preferences: {
+    following: {},
+    blocked: {},
   },
 };
 
@@ -29,6 +38,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+      };
+    case UPDATE_PREFERENCE:
+      return {
+        ...state,
+        following: action.following,
+        blocked: action.blocked,
       };
   }
   return state;

@@ -13,10 +13,9 @@ let initialState = {
     email: "",
     name: "",
   },
-  preferences: {
-    following: {},
-    blocked: {},
-  },
+
+  following: {},
+  blocked: {},
 };
 
 const userReducer = (state = initialState, action) => {
@@ -35,10 +34,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case SIGN_OUT_USER:
-      return {
-        ...state,
-        isLoggedIn: false,
-      };
+      return initialState;
     case UPDATE_PREFERENCE:
       return {
         ...state,

@@ -1,12 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import FollowingScreen from "../domain/Following/FollowingScreen";
-import AuthNavigation from "./AuthNavigation";
 import { useSelector } from "react-redux";
-import BlockedScreen from "../domain/Blocked/BlockedScreen";
 import PreferenceScreen from "../domain/Preferences/PreferenceScreen";
+import NewsTabs from "../domain/TabViews/NewsTabs";
+import AuthNavigation from "./AuthNavigation";
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator();
@@ -41,13 +39,22 @@ const BottomNavigation = () => {
     >
       <Tabs.Screen name="Profile" component={AuthNavigation} />
       {isLoggedIn && (
-        <Tabs.Screen
-          name="Preference"
-          component={PreferenceScreen}
-          options={{
-            title: "Preference",
-          }}
-        />
+        <>
+          <Tabs.Screen
+            name="Home"
+            component={NewsTabs}
+            options={{
+              title: "Home",
+            }}
+          />
+          <Tabs.Screen
+            name="Preference"
+            component={PreferenceScreen}
+            options={{
+              title: "Preference",
+            }}
+          />
+        </>
       )}
     </Tabs.Navigator>
   );

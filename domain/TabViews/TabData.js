@@ -7,19 +7,25 @@ const TabData = ({ data, token }) => {
   const [newsCards, setNewsCards] = useState([]);
 
   useEffect(() => {
+    let mounted = true;
     const Axios = getAxios(token);
+    let fetchUrl = "";
+    if (token == "") fetchUrl = `/injestion/cards/genre/${data.injestionId}`;
+    else fetchUrl = `/cards/genre/${data.injestionId}`;
 
-    Axios.get(`/cards/genre/${data.injestionId}`)
+    Axios.get(fetchUrl)
       .then((response) => {
         const data = response.data.cards;
-        setNewsCards(data);
-        setIsLoaded(true);
-        console.log(newsCards);
+        if ((mounted = true)) {
+          setNewsCards(data);
+          setIsLoaded(true);
+        }
       })
       .catch((error) => {
         console.log(error);
         setIsLoaded(true);
       });
+    return () => (mounted = false);
   }, [isLoaded]);
   return (
     <Content>

@@ -23,30 +23,37 @@ const FollowingScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
-      let genres = await fetchNewsComponents("genres");
-      let languages = await fetchNewsComponents("languages");
-      let localities = await fetchNewsComponents("localities");
-      let following = await getFollowing(user);
-      setGenre(
-        userIsFollowingMetaData(genres, following.genres.all_the_genres)
-      );
-      setLanguage(
-        userIsFollowingMetaData(
-          languages,
-          following.languages.all_the_languages
-        )
-      );
-      setLocality(
-        userIsFollowingMetaData(
-          localities,
-          following.localities.all_the_localities
-        )
-      );
-      dispatch(fetchBlockedAndFollowing(user.details.id, user.userToken));
+      console.log("Value of user is");
+      if (user.details.id !== "") {
+        let genres = await fetchNewsComponents("genres");
+        let languages = await fetchNewsComponents("languages");
+        let localities = await fetchNewsComponents("localities");
+        getFollowing(user).then((following) => {
+          console.log("Inside Following");
+          console.log(following);
 
-      setIsLoaded(true);
+          setGenre(
+            userIsFollowingMetaData(genres, following.genres.all_the_genres)
+          );
+          setLanguage(
+            userIsFollowingMetaData(
+              languages,
+              following.languages.all_the_languages
+            )
+          );
+          setLocality(
+            userIsFollowingMetaData(
+              localities,
+              following.localities.all_the_localities
+            )
+          );
+          dispatch(fetchBlockedAndFollowing(user.details.id, user.userToken));
+
+          setIsLoaded(true);
+        });
+      }
     })();
-  }, [update, setUpdate]);
+  }, [update, setUpdate, user.details.id]);
 
   return (
     <Container>

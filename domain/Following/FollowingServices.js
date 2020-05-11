@@ -58,20 +58,21 @@ export const unFollow = async (user, param, id, setUpdate) => {
 };
 
 export const getFollowing = async (user) => {
-  const Axios = getAxios(user.userToken);
+  console.log("User data");
+  console.log(user.details.id);
   let data = [];
-  try {
-    await Axios.get(`/home_profile/following/${user.details.id}`)
+  return new Promise((resolve, reject) => {
+    const Axios = getAxios(user.userToken);
+    Axios.get(`/home_profile/following/${user.details.id}`)
       .then((response) => {
         data = response.data;
+        console.log(data);
+        return resolve(data);
       })
       .catch((error) => {
         console.log(error);
       });
-  } catch (e) {
-    console.log(e);
-  }
-  return data;
+  });
 };
 
 export const userIsFollowingMetaData = (originalList, followingList) => {

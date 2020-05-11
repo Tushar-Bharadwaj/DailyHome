@@ -69,6 +69,7 @@ export const fetchUserDetails = (token) => {
             name: response.data.name,
             email: response.data.email,
           };
+
           dispatch(getUserInfoAction(userDetails));
           return resolve(userDetails);
         })

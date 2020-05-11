@@ -19,7 +19,6 @@ const UserProfileScreen = ({ navigation }) => {
   useEffect(() => {
     if (users.details.id !== "") {
       setIsLoaded(true);
-      console.log(users);
     }
   }, [users]);
 

@@ -60,22 +60,28 @@ const LoginScreen = ({ navigation, route }) => {
       setErrors(errorResult);
     } else {
       setIsLoading(false);
-      dispatch(signInUser(input))
-        .then((response) => {
-          dispatch(fetchUserDetails(response)).then((user) => {
-            dispatch(fetchBlockedAndFollowing(user.id, response));
-          });
-          navigation.navigate("Profile");
-        })
-        .catch((error) => console.log(error));
+
+      dispatch(signInUser(input)).then((userToken) => {
+        dispatch(fetchUserDetails(userToken)).then((userDetails) => {
+          console.log(userDetails);
+          console.log(userToken);
+          dispatch(fetchBlockedAndFollowing(userDetails.id, userToken)).then(
+            () => {
+              navigation.navigate("Profile");
+            }
+          );
+        });
+      });
     }
   };
 
   useEffect(() => {
     //Making Sure, upon account creation we go to login page.
+    let mounted = true;
     if (
       route.params?.accountCreated != undefined &&
-      route.params.accountCreated
+      route.params.accountCreated &&
+      mounted
     ) {
       Toast.show({
         text: "Your account has been successfully created!",
@@ -84,7 +90,9 @@ const LoginScreen = ({ navigation, route }) => {
       });
       route.params.accountCreated = false;
     }
-  }, [route.params]);
+
+    return () => (mounted = false);
+  }, [route.params?.accountCreated]);
 
   return !isLoading ? (
     <Container>

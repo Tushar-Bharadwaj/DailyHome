@@ -38,23 +38,21 @@ const BottomNavigation = () => {
       })}
     >
       <Tabs.Screen name="Profile" component={AuthNavigation} />
+      <Tabs.Screen
+        name="Home"
+        component={NewsTabs}
+        options={{
+          title: "Home",
+        }}
+      />
       {isLoggedIn && (
-        <>
-          <Tabs.Screen
-            name="Home"
-            component={NewsTabs}
-            options={{
-              title: "Home",
-            }}
-          />
-          <Tabs.Screen
-            name="Preference"
-            component={PreferenceScreen}
-            options={{
-              title: "Preference",
-            }}
-          />
-        </>
+        <Tabs.Screen
+          name="Preference"
+          component={PreferenceScreen}
+          options={{
+            title: "Preference",
+          }}
+        />
       )}
     </Tabs.Navigator>
   );

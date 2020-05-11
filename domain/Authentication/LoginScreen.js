@@ -63,8 +63,6 @@ const LoginScreen = ({ navigation, route }) => {
 
       dispatch(signInUser(input)).then((userToken) => {
         dispatch(fetchUserDetails(userToken)).then((userDetails) => {
-          console.log(userDetails);
-          console.log(userToken);
           dispatch(fetchBlockedAndFollowing(userDetails.id, userToken)).then(
             () => {
               navigation.navigate("Profile");

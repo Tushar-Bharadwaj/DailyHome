@@ -23,15 +23,11 @@ const FollowingScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
-      console.log("Value of user is");
       if (user.details.id !== "") {
         let genres = await fetchNewsComponents("genres");
         let languages = await fetchNewsComponents("languages");
         let localities = await fetchNewsComponents("localities");
         getFollowing(user).then((following) => {
-          console.log("Inside Following");
-          console.log(following);
-
           setGenre(
             userIsFollowingMetaData(genres, following.genres.all_the_genres)
           );

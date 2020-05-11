@@ -66,7 +66,6 @@ export const getFollowing = async (user) => {
     Axios.get(`/home_profile/following/${user.details.id}`)
       .then((response) => {
         data = response.data;
-        console.log(data);
         return resolve(data);
       })
       .catch((error) => {

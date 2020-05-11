@@ -7,50 +7,38 @@ import UserProfileScreen from "../domain/User/UserProfileScreen";
 import { useSelector } from "react-redux";
 import NewsCard from "../components/NewsCard";
 import NewsPage from "../domain/News/NewsPage";
-const AuthNavigation = () => {
+import NewsTabs from "../domain/TabViews/NewsTabs";
+const NewsTabNavigation = () => {
   const Stack = createStackNavigator();
 
-  const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
-  const initialRouteName = isLoggedIn ? "Profile" : "Login";
   return (
-    <Stack.Navigator initialRouteName={initialRouteName}>
+    <Stack.Navigator initialRouteName={"Tabs"}>
       <Stack.Screen
-        name="Login"
-        component={LoginScreen}
+        name="Tabs"
+        component={NewsTabs}
         options={{
-          title: "Login",
+          title: "News",
           headerStyle: styles.header,
           headerTitleStyle: styles.headerText,
           headerTitleAlign: "center",
+          headerShown: false,
         }}
       />
       <Stack.Screen
-        name="Register"
-        component={RegistrationScreen}
+        name="NewsPage"
+        component={NewsPage}
         options={{
-          title: "Register",
+          title: "News",
           headerStyle: styles.header,
           headerTitleStyle: styles.headerText,
           headerTitleAlign: "center",
-        }}
-      />
-
-      <Stack.Screen
-        name="Profile"
-        component={UserProfileScreen}
-        options={{
-          title: "Profile",
-          headerStyle: styles.header,
-          headerTitleStyle: styles.headerText,
-          headerTitleAlign: "center",
-          headerLeft: null,
         }}
       />
     </Stack.Navigator>
   );
 };
 
-export default AuthNavigation;
+export default NewsTabNavigation;
 
 const styles = StyleSheet.create({
   header: {

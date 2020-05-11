@@ -5,7 +5,7 @@ import { AWS_PREFIX } from "../constants/site-config";
 
 const NewsCard = ({ title, thumbnailPath, newsId }) => {
   return (
-    <Card>
+    <Card style={{ marginTop: 1, marginBottom: 1 }}>
       <CardItem>
         <Left
           style={{

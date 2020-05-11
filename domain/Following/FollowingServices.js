@@ -58,8 +58,6 @@ export const unFollow = async (user, param, id, setUpdate) => {
 };
 
 export const getFollowing = async (user) => {
-  console.log("User data");
-  console.log(user.details.id);
   let data = [];
   return new Promise((resolve, reject) => {
     const Axios = getAxios(user.userToken);

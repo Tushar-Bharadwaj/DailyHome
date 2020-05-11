@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import PreferenceScreen from "../domain/Preferences/PreferenceScreen";
 import NewsTabs from "../domain/TabViews/NewsTabs";
 import AuthNavigation from "./AuthNavigation";
+import NewsTabNavigation from "./NewsTabNavigation";
 
 const BottomNavigation = () => {
   const Tabs = createBottomTabNavigator();
@@ -36,11 +37,12 @@ const BottomNavigation = () => {
           }
         },
       })}
+      initialRouteName="Home"
     >
       <Tabs.Screen name="Profile" component={AuthNavigation} />
       <Tabs.Screen
         name="Home"
-        component={NewsTabs}
+        component={NewsTabNavigation}
         options={{
           title: "Home",
         }}

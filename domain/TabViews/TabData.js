@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import getAxios from "../../util/axios-helper";
 import { Content } from "native-base";
 import NewsCard from "../../components/NewsCard";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import AuthNavigation from "../../navigation/AuthNavigation";
+
 const TabData = ({ data, token }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [newsCards, setNewsCards] = useState([]);
-
+  const navigation = useNavigation();
   useEffect(() => {
     let mounted = true;
     const Axios = getAxios(token);
@@ -28,18 +32,24 @@ const TabData = ({ data, token }) => {
     return () => (mounted = false);
   }, [isLoaded]);
   return (
-    <Content>
+    <Content style={{ backgroundColor: "#f8f5f3" }}>
       {!isLoaded ? (
         <NewsCard title={null} thumbnailPath={null} newsId={null} />
       ) : (
         newsCards.map((item) => {
           return (
-            <NewsCard
+            <TouchableOpacity
               key={item.injestionId}
-              title={item.title}
-              thumbnailPath={item.thumbnailPath}
-              newsId={item.injestionId}
-            />
+              onPress={() =>
+                navigation.push("NewsPage", { newsId: item.injestionId })
+              }
+            >
+              <NewsCard
+                title={item.title}
+                thumbnailPath={item.thumbnailPath}
+                newsId={item.injestionId}
+              />
+            </TouchableOpacity>
           );
         })
       )}

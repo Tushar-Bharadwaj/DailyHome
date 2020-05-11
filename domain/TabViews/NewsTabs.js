@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import TabData from "./TabData";
 import styles from "./style";
 import { AppLoading } from "expo";
+import { useNavigation } from "@react-navigation/native";
 
 const NewsTabs = () => {
   const users = useSelector((state) => state.users);
@@ -19,7 +20,7 @@ const NewsTabs = () => {
   let data;
   if (users.isLoggedIn) data = users.following.genres;
   else data = generalNavigation;
-
+  const navigation = useNavigation();
   return (
     <Container style={{ backgroundColor: "#FFF" }}>
       <Header style={styles.header}>
@@ -58,7 +59,11 @@ const NewsTabs = () => {
                 key={item.injestionId}
                 heading={item.name}
               >
-                <TabData data={item} token={users.userToken} />
+                <TabData
+                  data={item}
+                  navigation={navigation}
+                  token={users.userToken}
+                />
               </Tab>
             );
           })}

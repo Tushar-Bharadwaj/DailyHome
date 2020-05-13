@@ -1,17 +1,15 @@
-import { Body, Container, Content, Header, Title } from "native-base";
+import { Container, Content } from "native-base";
 import React, { useEffect, useState } from "react";
-import getAxios from "../../util/axios-helper";
-import FollowingList from "./FollowingList";
-import styles from "./style";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  unFollow,
-  follow,
-  userIsFollowingMetaData,
-  getFollowing,
-  fetchNewsComponents,
-} from "./FollowingServices";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchBlockedAndFollowing } from "../../redux/users/userActions";
+import FollowingList from "./FollowingList";
+import {
+  fetchNewsComponents,
+  follow,
+  getFollowing,
+  unFollow,
+  userIsFollowingMetaData,
+} from "./FollowingServices";
 
 const FollowingScreen = ({ navigation }) => {
   const [update, setUpdate] = useState(0);

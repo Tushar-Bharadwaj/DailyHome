@@ -54,6 +54,7 @@ const NewsPage = ({ navigation, route }) => {
               }}
               resizeMode="contain"
             />
+            {console.log(AWS_PREFIX + card.imagePath)}
           </CardItem>
           <CardItem>
             <Text>{card.text}</Text>

@@ -38,71 +38,56 @@ export const signOut = () => {
  */
 
 export const signInUser = (formInputs) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     let Axios = getAxios();
-    return new Promise((resolve, reject) => {
-      Axios.post("/user_profile/auth/signin", {
-        password: formInputs.password,
-        email: formInputs.email,
-      })
-        .then((response) => {
-          const authToken = response.data.accessToken;
-          dispatch(signInAction(authToken));
-          return resolve(authToken);
-        })
-        .catch((error) => {
-          //TODO: Proper Error Toast
-          console.log(error);
-        });
+    const user = await Axios.post("/user_profile/auth/signin", {
+      password: formInputs.password,
+      email: formInputs.email,
     });
+
+    const token = user.data.accessToken;
+    dispatch(signInAction(token));
+    return token;
   };
 };
 
 export const fetchUserDetails = (token) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     let Axios = getAxios(token);
-    return new Promise((resolve, reject) => {
-      Axios.get("/user_profile/info")
-        .then((response) => {
-          const userDetails = {
-            id: response.data.id,
-            name: response.data.name,
-            email: response.data.email,
-          };
+    const user = await Axios.get("/user_profile/info");
 
-          dispatch(getUserInfoAction(userDetails));
-          return resolve(userDetails);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    const userDetails = {
+      id: user.data.id,
+      name: user.data.name,
+      email: user.data.email,
+    };
+    dispatch(getUserInfoAction(userDetails));
+    return userDetails;
   };
 };
 
 export const fetchBlockedAndFollowing = (userid, token) => {
   return async (dispatch) => {
     let Axios = getAxios(token);
-    const following = await Axios.get(`/home_profile/following/${userid}`).then(
-      (response) => {
-        return {
-          genres: response.data.genres.all_the_genres,
-          localities: response.data.localities.all_the_localities,
-          languages: response.data.languages.all_the_languages,
-          localities: response.data.localities.all_the_localities,
-        };
-      }
-    );
-    const blocked = await Axios.get(`/home_profile/blocked/${userid}`).then(
-      (response) => {
-        return {
-          genres: response.data.genres.all_the_genres,
-          localities: response.data.localities.all_the_localities,
-          languages: response.data.languages.all_the_languages,
-          localities: response.data.localities.all_the_localities,
-        };
-      }
-    );
+    const response = await Axios.get(`/home_profile/following/${userid}`);
+    const following = {
+      genres: response.data.genres.all_the_genres,
+      localities: response.data.localities.all_the_localities,
+      languages: response.data.languages.all_the_languages,
+      localities: response.data.localities.all_the_localities,
+    };
+
+    const blockedResponse = await Axios.get(`/home_profile/blocked/${userid}`);
+    const blocked = {
+      genres: blockedResponse.data.genres.all_the_genres,
+      localities: blockedResponse.data.localities.all_the_localities,
+      languages: blockedResponse.data.languages.all_the_languages,
+      localities: blockedResponse.data.localities.all_the_localities,
+    };
     dispatch(updatePreferenceAction(blocked, following));
+    return {
+      blocked: blocked,
+      following: following,
+    };
   };
 };

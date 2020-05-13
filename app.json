@@ -2,8 +2,9 @@
   "expo": {
     "name": "DailyHome",
     "slug": "DailyHome",
-    "platforms": ["ios", "android", "web"],
+    "platforms": ["android"],
     "version": "1.0.0",
+    "sdkVersion": "37.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -11,7 +12,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-
+    "android": {
+      "package": "com.dailyhome.in",
+      "versionCode": 1,
+      "permissions": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },

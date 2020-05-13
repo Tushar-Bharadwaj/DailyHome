@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import getAxios from "../../util/axios-helper";
-import { Content } from "native-base";
-import NewsCard from "../../components/NewsCard";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import AuthNavigation from "../../navigation/AuthNavigation";
+import { Content } from "native-base";
+import React, { useEffect, useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import NewsCard from "../../components/NewsCard";
+import getAxios from "../../util/axios-helper";
+import { FOR_YOU, GENRE } from "../../constants/tab-settings";
 
-const TabData = ({ data, token }) => {
+const TabData = ({ data, token, dataType }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [newsCards, setNewsCards] = useState([]);
   const navigation = useNavigation();
@@ -14,9 +14,13 @@ const TabData = ({ data, token }) => {
     let mounted = true;
     const Axios = getAxios(token);
     let fetchUrl = "";
-    if (token == "") fetchUrl = `/injestion/cards/genre/${data.injestionId}`;
-    else fetchUrl = `/cards/genre/${data.injestionId}`;
-
+    if (dataType == GENRE) {
+      if (token == "") fetchUrl = `/injestion/cards/genre/${data.injestionId}`;
+      else fetchUrl = `/cards/genre/${data.injestionId}`;
+    } else if ((dataType = FOR_YOU)) {
+      console.log("Inside For You");
+      fetchUrl = `/cards/genre`;
+    }
     Axios.get(fetchUrl)
       .then((response) => {
         const data = response.data.cards;

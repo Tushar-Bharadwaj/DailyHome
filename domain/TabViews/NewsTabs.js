@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
   Body,
   Container,
@@ -7,12 +8,11 @@ import {
   Tabs,
   Title,
 } from "native-base";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import TabData from "./TabData";
 import styles from "./style";
-import { AppLoading } from "expo";
-import { useNavigation } from "@react-navigation/native";
+import TabData from "./TabData";
+import { GENRE, FOR_YOU } from "../../constants/tab-settings";
 
 const NewsTabs = () => {
   const users = useSelector((state) => state.users);
@@ -35,6 +35,37 @@ const NewsTabs = () => {
         }}
         renderTabBar={() => <ScrollableTab />}
       >
+        {users.isLoggedIn && (
+          <Tab
+            tabStyle={{
+              backgroundColor: "#FFF",
+            }}
+            textStyle={{
+              color: "#e15f41",
+            }}
+            activeTabStyle={{
+              backgroundColor: "#FFF",
+              color: "#e15f41",
+            }}
+            activeTextStyle={{
+              color: "#e15f41",
+              fontWeight: "bold",
+            }}
+            tabBarUnderlineStyle={{
+              backgroundColor: "#e15f41",
+            }}
+            key={`XZ12`}
+            heading="For You"
+          >
+            <TabData
+              data={null}
+              navigation={navigation}
+              token={users.userToken}
+              dataType={FOR_YOU}
+            />
+          </Tab>
+        )}
+
         {data !== undefined &&
           data.map((item) => {
             return (
@@ -63,6 +94,7 @@ const NewsTabs = () => {
                   data={item}
                   navigation={navigation}
                   token={users.userToken}
+                  dataType={GENRE}
                 />
               </Tab>
             );

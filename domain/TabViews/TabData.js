@@ -24,6 +24,7 @@ const TabData = ({ data, token, dataType }) => {
     Axios.get(fetchUrl)
       .then((response) => {
         const data = response.data.cards;
+        console.log(data);
         if ((mounted = true)) {
           setNewsCards(data);
           setIsLoaded(true);

@@ -1,11 +1,10 @@
-import { Card, CardItem, Container, Content } from "native-base";
-import React, { useState, useEffect } from "react";
-import { Text } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import DailyButton from "../../components/DailyButton";
-import SecondaryButton from "../../components/SecondaryButton";
-import { signOut } from "../../redux/users/userActions";
 import { AppLoading } from "expo";
+import { Container, Tab, Tabs } from "native-base";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../../redux/users/userActions";
+import ProfileContainer from "./ProfileContainer";
+import { Text } from "react-native";
 
 const UserProfileScreen = ({ navigation }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,38 +23,56 @@ const UserProfileScreen = ({ navigation }) => {
 
   return isLoaded ? (
     <Container>
-      <Content>
-        <Card>
-          <CardItem
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <Text> ID : {users.details.id} </Text>
-            <Text> Name : {users.details.name} </Text>
-            <Text> Email : {users.details.email} </Text>
-          </CardItem>
-          <CardItem>
-            <DailyButton>
-              <Text
-                style={{
-                  color: "#FFF",
-                  fontWeight: "bold",
-                }}
-              >
-                Edit Profile
-              </Text>
-            </DailyButton>
-          </CardItem>
-          <CardItem style={{ justifyContent: "center" }}>
-            <SecondaryButton onPress={() => handleSignOut()}>
-              Sign Out
-            </SecondaryButton>
-          </CardItem>
-        </Card>
-      </Content>
+      <Tabs
+        tabBarUnderlineStyle={{
+          backgroundColor: "#e15f41",
+        }}
+      >
+        <Tab
+          tabStyle={{
+            backgroundColor: "#FFF",
+          }}
+          textStyle={{
+            color: "#e15f41",
+          }}
+          activeTabStyle={{
+            backgroundColor: "#FFF",
+            color: "#e15f41",
+          }}
+          activeTextStyle={{
+            color: "#e15f41",
+            fontWeight: "bold",
+          }}
+          tabBarUnderlineStyle={{
+            backgroundColor: "#e15f41",
+          }}
+          heading="Your Profile"
+        >
+          <ProfileContainer users={users} handleSignOut={handleSignOut} />
+        </Tab>
+        <Tab
+          tabStyle={{
+            backgroundColor: "#FFF",
+          }}
+          textStyle={{
+            color: "#e15f41",
+          }}
+          activeTabStyle={{
+            backgroundColor: "#FFF",
+            color: "#e15f41",
+          }}
+          activeTextStyle={{
+            color: "#e15f41",
+            fontWeight: "bold",
+          }}
+          tabBarUnderlineStyle={{
+            backgroundColor: "#e15f41",
+          }}
+          heading="Edit Profile"
+        >
+          <Text>Edit Profile</Text>
+        </Tab>
+      </Tabs>
     </Container>
   ) : (
     <AppLoading />

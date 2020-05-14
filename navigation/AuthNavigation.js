@@ -39,11 +39,7 @@ const AuthNavigation = () => {
         name="Profile"
         component={UserProfileScreen}
         options={{
-          title: "Profile",
-          headerStyle: styles.header,
-          headerTitleStyle: styles.headerText,
-          headerTitleAlign: "center",
-          headerLeft: null,
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

@@ -63,15 +63,7 @@ const FollowingScreen = ({ navigation }) => {
               user={user}
               param="genreIds"
             />
-            <FollowingList
-              title="LANGUAGE"
-              data={language}
-              follow={follow}
-              unFollow={unFollow}
-              updateHandler={setUpdate}
-              user={user}
-              param="languageIds"
-            />
+
             <FollowingList
               title="LOCALITY"
               data={locality}

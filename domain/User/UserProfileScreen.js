@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../redux/users/userActions";
 import ProfileContainer from "./ProfileContainer";
 import { Text } from "react-native";
+import EditProfile from "./EditProfile";
 
 const UserProfileScreen = ({ navigation }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [logout, setLogout] = useState(false);
   const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const handleSignOut = () => {
     dispatch(signOut());
-    navigation.navigate("Login");
+    setLogout(true);
   };
 
   useEffect(() => {
@@ -20,6 +22,10 @@ const UserProfileScreen = ({ navigation }) => {
       setIsLoaded(true);
     }
   }, [users]);
+  //Logging out user only after the Redux is updated
+  useEffect(() => {
+    if (logout && !users.isLoggedIn) navigation.navigate("Login");
+  }, [users, logout]);
 
   return isLoaded ? (
     <Container>
@@ -70,7 +76,7 @@ const UserProfileScreen = ({ navigation }) => {
           }}
           heading="Edit Profile"
         >
-          <Text>Edit Profile</Text>
+          <EditProfile />
         </Tab>
       </Tabs>
     </Container>

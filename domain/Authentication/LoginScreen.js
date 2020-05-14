@@ -53,6 +53,7 @@ const LoginScreen = ({ navigation, route }) => {
   const [formInputs, handleChange] = useForm(initalFormState);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users);
+
   const handleSubmit = async (input) => {
     setErrors({});
     const errorResult = validateForm(input);
@@ -61,24 +62,10 @@ const LoginScreen = ({ navigation, route }) => {
     } else {
       setIsLoading(false);
 
-      // dispatch(signInUser(input)).then((userToken) => {
-      //   dispatch(fetchUserDetails(userToken)).then((userDetails) => {
-      //     dispatch(fetchBlockedAndFollowing(userDetails.id, userToken)).then(
-      //       () => {
-      //         navigation.navigate("Profile");
-      //       }
-      //     );
-      //   });
-      // });
       (async () => {
         const userToken = await dispatch(signInUser(input));
-        console.log(userToken);
         const userDetails = await dispatch(fetchUserDetails(userToken));
-        console.log(userDetails);
-        const navigator = await dispatch(
-          fetchBlockedAndFollowing(userDetails.id, userToken)
-        );
-        console.log(navigator);
+        await dispatch(fetchBlockedAndFollowing(userDetails.id, userToken));
         navigation.navigate("Profile");
       })();
     }

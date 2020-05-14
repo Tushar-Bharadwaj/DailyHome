@@ -50,15 +50,7 @@ const BlockedScreen = ({ navigation }) => {
               user={user}
               param="genreIds"
             />
-            <BlockedList
-              title="LANGUAGE"
-              data={language}
-              block={block}
-              unBlock={unBlock}
-              updateHandler={setUpdate}
-              user={user}
-              param="languageIds"
-            />
+
             <BlockedList
               title="LOCALITY"
               data={locality}

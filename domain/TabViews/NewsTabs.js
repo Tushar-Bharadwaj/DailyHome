@@ -12,7 +12,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./style";
 import TabData from "./TabData";
-import { GENRE, FOR_YOU } from "../../constants/tab-settings";
+import { GENRE, FOR_YOU, TRENDING } from "../../constants/tab-settings";
 
 const NewsTabs = () => {
   const users = useSelector((state) => state.users);
@@ -62,6 +62,37 @@ const NewsTabs = () => {
               navigation={navigation}
               token={users.userToken}
               dataType={FOR_YOU}
+            />
+          </Tab>
+        )}
+
+        {users.isLoggedIn && (
+          <Tab
+            tabStyle={{
+              backgroundColor: "#FFF",
+            }}
+            textStyle={{
+              color: "#e15f41",
+            }}
+            activeTabStyle={{
+              backgroundColor: "#FFF",
+              color: "#e15f41",
+            }}
+            activeTextStyle={{
+              color: "#e15f41",
+              fontWeight: "bold",
+            }}
+            tabBarUnderlineStyle={{
+              backgroundColor: "#e15f41",
+            }}
+            key={`XZ15`}
+            heading="Trending"
+          >
+            <TabData
+              data={null}
+              navigation={navigation}
+              token={users.userToken}
+              dataType={TRENDING}
             />
           </Tab>
         )}

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import NewsCard from "../../components/NewsCard";
 import getAxios from "../../util/axios-helper";
-import { FOR_YOU, GENRE } from "../../constants/tab-settings";
+import { FOR_YOU, GENRE, TRENDING } from "../../constants/tab-settings";
 
 const TabData = ({ data, token, dataType }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,9 +17,11 @@ const TabData = ({ data, token, dataType }) => {
     if (dataType == GENRE) {
       if (token == "") fetchUrl = `/injestion/cards/genre/${data.injestionId}`;
       else fetchUrl = `/cards/genre/${data.injestionId}`;
-    } else if ((dataType = FOR_YOU)) {
-      console.log("Inside For You");
+    } else if (dataType == FOR_YOU) {
       fetchUrl = `/cards/genre`;
+    } else if (dataType == TRENDING) {
+      fetchUrl = `/cards/trending`;
+      console.log("Inside Trending");
     }
     Axios.get(fetchUrl)
       .then((response) => {

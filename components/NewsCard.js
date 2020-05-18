@@ -4,7 +4,13 @@ import { Card, CardItem, Left, Right, H2, Content, View } from "native-base";
 import { AWS_PREFIX } from "../constants/site-config";
 import HashTagHolder from "./HashTagHolder";
 
-const NewsCard = ({ title, thumbnailPath, newsId }) => {
+const NewsCard = ({ title, thumbnailPath, newsId, tags }) => {
+  let displayTags = false;
+  if (tags !== undefined) {
+    const sliceValue = tags.length > 3 ? 3 : tags.length;
+    displayTags = tags.slice(0, sliceValue);
+  }
+
   return (
     <Card style={{ marginTop: 1, marginBottom: 0 }}>
       <CardItem style={{ paddingTop: 3, paddingBottom: 2 }}>
@@ -28,9 +34,10 @@ const NewsCard = ({ title, thumbnailPath, newsId }) => {
               flexWrap: "wrap",
             }}
           >
-            <HashTagHolder tag="Test" />
-            <HashTagHolder tag="Some" />
-            <HashTagHolder tag="Some" />
+            {displayTags &&
+              displayTags.map((item) => {
+                return <HashTagHolder key={item.injestionId} tag={item.name} />;
+              })}
           </View>
         </Left>
         <Right

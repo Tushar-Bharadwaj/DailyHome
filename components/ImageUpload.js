@@ -32,7 +32,6 @@ export default class ImageUpload extends React.Component {
         >
           <Text>Select Image</Text>
         </Button>
-        {console.log("Image Upload")}
       </View>
     );
   }

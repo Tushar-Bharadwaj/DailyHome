@@ -4,7 +4,12 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import NewsCard from "../../components/NewsCard";
 import getAxios from "../../util/axios-helper";
-import { FOR_YOU, GENRE, TRENDING } from "../../constants/tab-settings";
+import {
+  FOR_YOU,
+  GENRE,
+  TRENDING,
+  NOT_LOGGED_TRENDING,
+} from "../../constants/tab-settings";
 
 const TabData = ({ data, token, dataType }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,11 +26,12 @@ const TabData = ({ data, token, dataType }) => {
       fetchUrl = `/cards/genre`;
     } else if (dataType == TRENDING) {
       fetchUrl = `/cards/trending`;
-      console.log("Inside Trending");
+    } else if (dataType == NOT_LOGGED_TRENDING) {
+      fetchUrl = `/injestion/cards/trending`;
     }
     Axios.get(fetchUrl)
       .then((response) => {
-        const data = response.data.cards;
+        const data = response.data.dataCards;
         console.log(data);
         if ((mounted = true)) {
           setNewsCards(data);
@@ -55,6 +61,7 @@ const TabData = ({ data, token, dataType }) => {
                 title={item.title}
                 thumbnailPath={item.thumbnailPath}
                 newsId={item.injestionId}
+                tags={item.tags}
               />
             </TouchableOpacity>
           );

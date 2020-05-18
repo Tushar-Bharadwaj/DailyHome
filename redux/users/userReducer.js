@@ -12,6 +12,7 @@ let initialState = {
     id: "",
     email: "",
     name: "",
+    image: "",
   },
 
   following: {},

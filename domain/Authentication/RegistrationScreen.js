@@ -16,6 +16,7 @@ import ErrorCard from "../../components/ErrorCard";
 import useForm from "../../hooks/useForm";
 import getAxios from "../../util/axios-helper";
 import styles from "./style";
+import ImageUpload from "../../components/ImageUpload";
 
 const validateForm = ({ name, email, password }) => {
   const errors = {
@@ -54,6 +55,7 @@ const RegistrationScreen = ({ navigation }) => {
     email: "",
     password: "",
     gender: "Male",
+    image: "",
   };
   const [errors, setErrors] = useState({
     name: [],
@@ -63,6 +65,10 @@ const RegistrationScreen = ({ navigation }) => {
   });
 
   const [formInput, handleChange] = useForm(initialFormState);
+
+  const updateImage = (data) => {
+    handleChange("image", data);
+  };
 
   const handleSubmit = async (input) => {
     setErrors({});
@@ -76,6 +82,7 @@ const RegistrationScreen = ({ navigation }) => {
         password: formInput.password,
         email: formInput.email,
         gender: formInput.gender,
+        base64: formInput.image,
       })
         .then((response) => {
           navigation.navigate("Login", {
@@ -96,11 +103,8 @@ const RegistrationScreen = ({ navigation }) => {
     <Container>
       <Content>
         <Card transparent>
-          <CardItem style={{ justifyContent: "center" }}>
-            <Image
-              source={require("../../assets/images/logo.png")}
-              style={{ alignSelf: "center" }}
-            />
+          <CardItem>
+            <ImageUpload handleSubmit={updateImage} />
           </CardItem>
 
           <ErrorCard>{errors.name?.join("\n")}</ErrorCard>

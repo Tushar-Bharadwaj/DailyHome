@@ -40,7 +40,6 @@ const EditProfile = () => {
   }, [update, setUpdate, user.details.id]);
   return (
     <>
-      <ImageUpload handleSubmit={handleSubmit} />
       <FollowingList
         title="LANGUAGE"
         data={language}

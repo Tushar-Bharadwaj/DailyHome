@@ -14,18 +14,15 @@ export const updateTabDetails = (navigationDetails) => {
 export const fetchTabDetails = (token) => {
   return async (dispatch) => {
     const Axios = getAxios(token);
-    const navigation = await Axios.get(
-      "/injestion/user_profile/newsComponents/generic"
-    );
+    const navigation = await Axios.get("/user_profile/navigation");
 
     const navigationDetails = {
-      genres: navigation.data.all_the_genres || [],
-      localities: navigation.data.all_the_localities || [],
-      tags: navigation.data.all_the_tags || [],
-      sources: navigation.data.all_the_sources || [],
+      genres: navigation.data.genres.all_the_genres || [],
+      localities: navigation.data.localities.all_the_localities || [],
+      tags: navigation.data.tags.all_the_tags || [],
+      sources: navigation.data.sources.all_the_sources || [],
     };
-    console.log("Tab Details");
-    console.log(navigationDetails);
+
     dispatch(updateTabDetails(navigationDetails));
     return true;
   };

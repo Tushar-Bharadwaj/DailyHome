@@ -32,7 +32,7 @@ const TabData = ({ data, token, dataType }) => {
     Axios.get(fetchUrl)
       .then((response) => {
         const data = response.data.dataCards;
-        console.log(data);
+
         if ((mounted = true)) {
           setNewsCards(data);
           setIsLoaded(true);
@@ -47,14 +47,22 @@ const TabData = ({ data, token, dataType }) => {
   return (
     <Content style={{ backgroundColor: "#f8f5f3" }}>
       {!isLoaded ? (
-        <NewsCard title={null} thumbnailPath={null} newsId={null} />
+        <NewsCard
+          title={null}
+          source={null}
+          thumbnailPath={null}
+          newsId={null}
+        />
       ) : (
         newsCards.map((item) => {
           return (
             <TouchableOpacity
               key={item.injestionId}
               onPress={() =>
-                navigation.push("NewsPage", { newsId: item.injestionId })
+                navigation.push("NewsPage", {
+                  newsId: item.injestionId,
+                  source: item.sourceData,
+                })
               }
             >
               <NewsCard
@@ -62,6 +70,7 @@ const TabData = ({ data, token, dataType }) => {
                 thumbnailPath={item.thumbnailPath}
                 newsId={item.injestionId}
                 tags={item.tags}
+                source={item.sourceData}
               />
             </TouchableOpacity>
           );

@@ -4,7 +4,7 @@ import { Card, CardItem, Left, Right, H2, Content, View } from "native-base";
 import { AWS_PREFIX } from "../constants/site-config";
 import HashTagHolder from "./HashTagHolder";
 
-const NewsCard = ({ title, thumbnailPath, newsId, tags }) => {
+const NewsCard = ({ title, thumbnailPath, newsId, tags, source }) => {
   let displayTags = false;
   if (tags !== undefined) {
     const sliceValue = tags.length > 3 ? 3 : tags.length;
@@ -28,6 +28,13 @@ const NewsCard = ({ title, thumbnailPath, newsId, tags }) => {
               {title}
             </Text>
           </Content>
+          {source && (
+            <Content style={{ paddingTop: 10, paddingBottom: 10 }}>
+              <Text style={{ color: "#e15f41", fontWeight: "bold" }}>
+                Source : {source.name}
+              </Text>
+            </Content>
+          )}
           <View
             style={{
               flexDirection: "row",

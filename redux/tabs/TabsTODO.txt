@@ -1,0 +1,24 @@
+- As soon as the user logs in, fetch all the current navigation tabs that he is following, 
+  if it's length is 0, then show the default genres. 
+
+- Fetch appropriate tabs for each of the selected preferences.
+
+- UI To Add New Tab For navigation
+
+
+
+
+=> UI Changes That Need To Be Done
+  -> [ + ] Icon On Corner Of navigation
+  -> Display All Genres, Tags, Sources etc.
+  -> Ability To Add To Redux Stores And Update.
+  
+
+=> PRIMARY TASK LIST
+  -> [ ] Display All The Available Things On The UI.
+  -> [ ] Create Intersection Function To Find The Current Tabs being displayed
+  -> [ ] Create "Add To Tab" functionality
+  -> [ ] Create "Remove From Tab" functionality
+  -> [ ] Update The Tab Reducers
+  -> [ ] Decide which Navigation to display
+  -> [ ] Display Updated Navigation

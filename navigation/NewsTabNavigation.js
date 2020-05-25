@@ -1,12 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { StyleSheet } from "react-native";
-import LoginScreen from "../domain/Authentication/LoginScreen";
-import RegistrationScreen from "../domain/Authentication/RegistrationScreen";
-import UserProfileScreen from "../domain/User/UserProfileScreen";
-import { useSelector } from "react-redux";
-import NewsCard from "../components/NewsCard";
 import NewsPage from "../domain/News/NewsPage";
+import AddToTabPage from "../domain/TabViews/AddToTabPage";
 import NewsTabs from "../domain/TabViews/NewsTabs";
 const NewsTabNavigation = () => {
   const Stack = createStackNavigator();
@@ -29,6 +25,16 @@ const NewsTabNavigation = () => {
         component={NewsPage}
         options={{
           title: "News",
+          headerStyle: styles.header,
+          headerTitleStyle: styles.headerText,
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="TabNav"
+        component={AddToTabPage}
+        options={{
+          title: "Add To Tabs",
           headerStyle: styles.header,
           headerTitleStyle: styles.headerText,
           headerTitleAlign: "center",

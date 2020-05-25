@@ -18,6 +18,7 @@ import {
   TRENDING,
   NOT_LOGGED_TRENDING,
 } from "../../constants/tab-settings";
+import AddToTabButton from "./AddToTabButton";
 
 const NewsTabs = () => {
   const users = useSelector((state) => state.users);
@@ -28,6 +29,7 @@ const NewsTabs = () => {
   const navigation = useNavigation();
   return (
     <Container style={{ backgroundColor: "#FFF" }}>
+      <AddToTabButton navigation={navigation} />
       <Header style={styles.header}>
         <Body style={styles.headerText}>
           <Title>Daily Home</Title>

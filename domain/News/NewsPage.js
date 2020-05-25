@@ -4,7 +4,7 @@ import { Card, Content, CardItem } from "native-base";
 import getAxios from "../../util/axios-helper";
 import { AWS_PREFIX } from "../../constants/site-config";
 const NewsPage = ({ navigation, route }) => {
-  const { newsId } = route.params;
+  const { newsId, source } = route.params;
   const [isLoaded, setIsLoaded] = useState(false);
   const [card, setCard] = useState({});
   const windowWidth = Dimensions.get("window");
@@ -14,6 +14,7 @@ const NewsPage = ({ navigation, route }) => {
       const Axios = getAxios();
       Axios.get(`/injestion/article/${newsId}`)
         .then((response) => {
+          console.log(response.data);
           if ((mounted = true)) {
             setCard(response.data);
             setIsLoaded(true);
@@ -59,6 +60,13 @@ const NewsPage = ({ navigation, route }) => {
           <CardItem>
             <Text>{card.text}</Text>
           </CardItem>
+          {source && (
+            <CardItem style={{ paddingTop: 10, paddingBottom: 10 }}>
+              <Text style={{ color: "#e15f41", fontWeight: "bold" }}>
+                Source : {source.name}
+              </Text>
+            </CardItem>
+          )}
         </Card>
       </Content>
     )

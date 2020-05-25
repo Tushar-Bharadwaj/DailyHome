@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import LoginScreen from "../domain/Authentication/LoginScreen";
 import RegistrationScreen from "../domain/Authentication/RegistrationScreen";
 import UserProfileScreen from "../domain/User/UserProfileScreen";
+import AddToTabPage from "../domain/TabViews/AddToTabPage";
 const AuthNavigation = () => {
   const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const AuthNavigation = () => {
               headerTitleAlign: "center",
             }}
           />
+
           <Stack.Screen
             name="Register"
             component={RegistrationScreen}
@@ -36,13 +38,15 @@ const AuthNavigation = () => {
           />
         </>
       ) : (
-        <Stack.Screen
-          name="Profile"
-          component={UserProfileScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
+        <>
+          <Stack.Screen
+            name="Profile"
+            component={UserProfileScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </>
       )}
     </Stack.Navigator>
   );

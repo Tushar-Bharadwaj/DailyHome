@@ -13,6 +13,7 @@ import {
   fetchBlockedAndFollowing,
 } from "../../redux/users/userActions";
 import styles from "./style";
+import { fetchTabDetails } from "../../redux/tabs/tabsActions";
 
 const validateForm = ({ email, password }) => {
   const errors = {
@@ -66,6 +67,7 @@ const LoginScreen = ({ navigation, route }) => {
         const userToken = await dispatch(signInUser(input));
         const userDetails = await dispatch(fetchUserDetails(userToken));
         await dispatch(fetchBlockedAndFollowing(userDetails.id, userToken));
+        await dispatch(fetchTabDetails(userToken));
         navigation.navigate("Profile");
       })();
     }

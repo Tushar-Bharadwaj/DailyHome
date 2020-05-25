@@ -13,7 +13,13 @@ const ProfileContainer = ({ users, handleSignOut }) => {
         <CardItem>
           <Image
             source={{ uri: AWS_PREFIX + users.details.image }}
-            style={{ height: 100, width: 100, flex: 1, resizeMode: "contain" }}
+            style={{
+              height: 100,
+              width: 100,
+              flex: 1,
+              resizeMode: "contain",
+              borderRadius: 100,
+            }}
           />
         </CardItem>
         <CardItem

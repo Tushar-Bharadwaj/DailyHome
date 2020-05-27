@@ -23,13 +23,21 @@ import AddToTabButton from "./AddToTabButton";
 const NewsTabs = () => {
   const users = useSelector((state) => state.users);
   const generalNavigation = useSelector((state) => state.generalNavigation);
+  const tabs = useSelector((state) => state.tabs);
+
+  const tabDataLength =
+    tabs.sources.length +
+    tabs.genres.length +
+    tabs.localities.length +
+    tabs.tags.length;
+  console.log("Tab Length is " + tabDataLength);
   let data;
   if (users.isLoggedIn) data = users.following.genres;
   else data = generalNavigation;
   const navigation = useNavigation();
   return (
     <Container style={{ backgroundColor: "#FFF" }}>
-      <AddToTabButton navigation={navigation} />
+      {users.isLoggedIn && <AddToTabButton navigation={navigation} />}
       <Header style={styles.header}>
         <Body style={styles.headerText}>
           <Title>Daily Home</Title>
@@ -69,6 +77,7 @@ const NewsTabs = () => {
               navigation={navigation}
               token={users.userToken}
               dataType={FOR_YOU}
+              fetchType="genre"
             />
           </Tab>
         )}
@@ -100,6 +109,7 @@ const NewsTabs = () => {
               navigation={navigation}
               token={users.userToken}
               dataType={TRENDING}
+              fetchType="genre"
             />
           </Tab>
         )}
@@ -131,10 +141,12 @@ const NewsTabs = () => {
               navigation={navigation}
               token={users.userToken}
               dataType={NOT_LOGGED_TRENDING}
+              fetchType="genre"
             />
           </Tab>
         )}
-        {data !== undefined &&
+        {!users.isLoggedIn &&
+          data.length !== 0 &&
           data.map((item) => {
             return (
               <Tab
@@ -163,6 +175,147 @@ const NewsTabs = () => {
                   navigation={navigation}
                   token={users.userToken}
                   dataType={GENRE}
+                  fetchType="genre"
+                />
+              </Tab>
+            );
+          })}
+        {users.isLoggedIn &&
+          tabs.genres.length !== 0 &&
+          tabs.genres.map((item) => {
+            return (
+              <Tab
+                tabStyle={{
+                  backgroundColor: "#FFF",
+                }}
+                textStyle={{
+                  color: "#e15f41",
+                }}
+                activeTabStyle={{
+                  backgroundColor: "#FFF",
+                  color: "#e15f41",
+                }}
+                activeTextStyle={{
+                  color: "#e15f41",
+                  fontWeight: "bold",
+                }}
+                tabBarUnderlineStyle={{
+                  backgroundColor: "#e15f41",
+                }}
+                key={item.injestionId}
+                heading={item.name}
+              >
+                <TabData
+                  data={item}
+                  navigation={navigation}
+                  token={users.userToken}
+                  dataType={GENRE}
+                  fetchType="genre"
+                />
+              </Tab>
+            );
+          })}
+        {users.isLoggedIn &&
+          tabs.localities.length !== 0 &&
+          tabs.localities.map((item) => {
+            return (
+              <Tab
+                tabStyle={{
+                  backgroundColor: "#FFF",
+                }}
+                textStyle={{
+                  color: "#e15f41",
+                }}
+                activeTabStyle={{
+                  backgroundColor: "#FFF",
+                  color: "#e15f41",
+                }}
+                activeTextStyle={{
+                  color: "#e15f41",
+                  fontWeight: "bold",
+                }}
+                tabBarUnderlineStyle={{
+                  backgroundColor: "#e15f41",
+                }}
+                key={item.injestionId}
+                heading={item.name}
+              >
+                <TabData
+                  data={item}
+                  navigation={navigation}
+                  token={users.userToken}
+                  dataType={GENRE}
+                  fetchType="locality"
+                />
+              </Tab>
+            );
+          })}
+        {users.isLoggedIn &&
+          tabs.sources.length !== 0 &&
+          tabs.sources.map((item) => {
+            return (
+              <Tab
+                tabStyle={{
+                  backgroundColor: "#FFF",
+                }}
+                textStyle={{
+                  color: "#e15f41",
+                }}
+                activeTabStyle={{
+                  backgroundColor: "#FFF",
+                  color: "#e15f41",
+                }}
+                activeTextStyle={{
+                  color: "#e15f41",
+                  fontWeight: "bold",
+                }}
+                tabBarUnderlineStyle={{
+                  backgroundColor: "#e15f41",
+                }}
+                key={item.injestionId}
+                heading={item.name}
+              >
+                <TabData
+                  data={item}
+                  navigation={navigation}
+                  token={users.userToken}
+                  dataType={GENRE}
+                  fetchType="source"
+                />
+              </Tab>
+            );
+          })}
+        {users.isLoggedIn &&
+          tabs.tags.length !== 0 &&
+          tabs.tags.map((item) => {
+            return (
+              <Tab
+                tabStyle={{
+                  backgroundColor: "#FFF",
+                }}
+                textStyle={{
+                  color: "#e15f41",
+                }}
+                activeTabStyle={{
+                  backgroundColor: "#FFF",
+                  color: "#e15f41",
+                }}
+                activeTextStyle={{
+                  color: "#e15f41",
+                  fontWeight: "bold",
+                }}
+                tabBarUnderlineStyle={{
+                  backgroundColor: "#e15f41",
+                }}
+                key={item.injestionId}
+                heading={item.name}
+              >
+                <TabData
+                  data={item}
+                  navigation={navigation}
+                  token={users.userToken}
+                  dataType={GENRE}
+                  fetchType="tags"
                 />
               </Tab>
             );

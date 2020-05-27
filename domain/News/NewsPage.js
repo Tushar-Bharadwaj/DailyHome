@@ -14,7 +14,6 @@ const NewsPage = ({ navigation, route }) => {
       const Axios = getAxios();
       Axios.get(`/injestion/article/${newsId}`)
         .then((response) => {
-          console.log(response.data);
           if ((mounted = true)) {
             setCard(response.data);
             setIsLoaded(true);
@@ -55,7 +54,6 @@ const NewsPage = ({ navigation, route }) => {
               }}
               resizeMode="contain"
             />
-            {console.log(AWS_PREFIX + card.imagePath)}
           </CardItem>
           <CardItem>
             <Text>{card.text}</Text>

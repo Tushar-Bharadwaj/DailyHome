@@ -7,7 +7,7 @@ const TabList = ({
   title,
   data,
   follow,
-  removeFromNavigation,
+  unfollow,
   user,
   param,
   updateHandler,
@@ -23,7 +23,7 @@ const TabList = ({
       follow(user, param, injestionId, updateHandler);
       return;
     }
-    removeFromNavigation(user, param, injestionId, updateHandler);
+    unfollow(user, param, injestionId, updateHandler);
   };
   return (
     <List>

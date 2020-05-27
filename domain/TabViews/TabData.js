@@ -11,7 +11,7 @@ import {
   NOT_LOGGED_TRENDING,
 } from "../../constants/tab-settings";
 
-const TabData = ({ data, token, dataType }) => {
+const TabData = ({ data, token, dataType, fetchType }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [newsCards, setNewsCards] = useState([]);
   const navigation = useNavigation();
@@ -20,8 +20,9 @@ const TabData = ({ data, token, dataType }) => {
     const Axios = getAxios(token);
     let fetchUrl = "";
     if (dataType == GENRE) {
-      if (token == "") fetchUrl = `/injestion/cards/genre/${data.injestionId}`;
-      else fetchUrl = `/cards/genre/${data.injestionId}`;
+      if (token == "")
+        fetchUrl = `/injestion/cards/${fetchType}/${data.injestionId}`;
+      else fetchUrl = `/cards/${fetchType}/${data.injestionId}`;
     } else if (dataType == FOR_YOU) {
       fetchUrl = `/cards/genre`;
     } else if (dataType == TRENDING) {

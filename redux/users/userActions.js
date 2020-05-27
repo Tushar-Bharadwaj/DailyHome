@@ -55,8 +55,7 @@ export const fetchUserDetails = (token) => {
   return async (dispatch) => {
     let Axios = getAxios(token);
     const user = await Axios.get("/user_profile/info");
-    console.log("User info is");
-    console.log(user.data);
+
     const userDetails = {
       id: user.data.id,
       name: user.data.name,

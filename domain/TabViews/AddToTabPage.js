@@ -46,7 +46,7 @@ const AddToTabPage = () => {
             <TabList
               title="GENRE"
               follow={addToNavigation}
-              removeFromNavigation={removeFromNavigation}
+              unfollow={removeFromNavigation}
               updateHandler={setUpdate}
               user={user}
               data={genres}
@@ -55,7 +55,7 @@ const AddToTabPage = () => {
             <TabList
               title="SOURCE"
               follow={addToNavigation}
-              unFollow={removeFromNavigation}
+              unfollow={removeFromNavigation}
               updateHandler={setUpdate}
               user={user}
               data={source}
@@ -64,7 +64,7 @@ const AddToTabPage = () => {
             <TabList
               title="LOCALITY"
               follow={addToNavigation}
-              unFollow={removeFromNavigation}
+              unfollow={removeFromNavigation}
               updateHandler={setUpdate}
               user={user}
               data={localities}
@@ -73,7 +73,7 @@ const AddToTabPage = () => {
             <TabList
               title="TAGS"
               follow={addToNavigation}
-              unFollow={removeFromNavigation}
+              unfollow={removeFromNavigation}
               updateHandler={setUpdate}
               user={user}
               data={tags}

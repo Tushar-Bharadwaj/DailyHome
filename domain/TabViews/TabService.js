@@ -16,6 +16,7 @@ export const addToNavigation = async (user, param, id, setUpdate) => {
 };
 
 export const removeFromNavigation = async (user, param, id, setUpdate) => {
+  console.log("Here");
   const Axios = getAxios(user.userToken);
   try {
     await Axios.delete(`/user_profile/navigation/${param}/${id}`)

@@ -16,10 +16,6 @@ const NavigationManager = () => {
     })();
   }, []);
 
-  useEffect(() => {
-    if (navigationLoaded) console.log(navigationDetails);
-  }, [navigationLoaded]);
-
   return !navigationLoaded ? (
     <AppLoading />
   ) : (

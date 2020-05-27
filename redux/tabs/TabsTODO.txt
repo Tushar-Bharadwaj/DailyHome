@@ -15,10 +15,5 @@
   
 
 => PRIMARY TASK LIST
-  -> [+] Display All The Available Things On The UI.
-  -> [+] Create Intersection Function To Find The Current Tabs being displayed
-  -> [ ] Create "Add To Tab" functionality
-  -> [ ] Create "Remove From Tab" functionality
-  -> [ ] Update The Tab Reducers
   -> [ ] Decide which Navigation to display
   -> [ ] Display Updated Navigation
